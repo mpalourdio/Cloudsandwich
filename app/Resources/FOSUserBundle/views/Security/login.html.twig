@@ -1,0 +1,41 @@
+{% extends '@CloudSandwichCore/base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/cloudsandwichcore/css/pagespecific/login.css') }}"/>
+
+{% endblock %}
+
+{% block content -%}
+    {% block fos_user_content %}
+        {% if error %}
+            <div class="fbm fbm_error ui-widget ui-corner-all">{{ error|trans }}</div>
+        {% endif %}
+
+        <div class="container">
+            <form class="form-signin" role="form" action="{{ path("fos_user_security_check") }}" method="post" id='login_form'>
+                <h2 class="form-signin-heading">{{ 'layout.login'|trans }}</h2>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                <label for="username" class="required">{{ 'security.login.username'|trans }}</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required"
+                       class="text-input form-control"/>
+                <br>
+                <label for="password" class="required">{{ 'security.login.password'|trans }}</label>
+                <input type="password" id="password" name="_password" required="required" class="text-input form-control"/>
+                <br>
+                <label></label>
+
+                <input class="btn btn-lg btn-primary btn-block" type="submit" id="_submit" name="_submit"
+                       value="{{ 'security.login.submit'|trans }}"
+                       class="submit-input ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"/>
+                <a href="{{ path("fos_user_resetting_request") }}" style="text-align: center;color:#777;margin-top:10px;display:block;">Forgot your password?</a>
+
+            </form>
+
+        </div> <!-- /container -->
+
+
+    {% endblock fos_user_content %}
+{% endblock %}

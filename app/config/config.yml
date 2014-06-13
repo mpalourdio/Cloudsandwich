@@ -1,10 +1,13 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: CloudSandwich\CoreBundle\Entity\User
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -32,8 +35,8 @@ twig:
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ ]
+    use_controller: true
+    bundles:        ['CloudSandwichCoreBundle', 'FOSUserBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
