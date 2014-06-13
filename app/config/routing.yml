@@ -1,0 +1,20 @@
+cloud_sandwich_calendar:
+    resource: "@CloudSandwichCalendarBundle/Controller/"
+    type:     annotation
+    prefix:   /calendar/
+
+cloud_sandwich_contact:
+    resource: "@CloudSandwichContactBundle/Controller/"
+    type:     annotation
+    prefix:   /contacts/
+
+cloud_sandwich_file:
+    resource: "@CloudSandwichFileBundle/Controller/"
+    type:     annotation
+    prefix:   /files/
+
+cloud_sandwich_core:
+    resource: "@CloudSandwichCoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
