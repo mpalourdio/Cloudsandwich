@@ -12,5 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface MenuFillerInterface
 {
+    /**
+     * @return array() of values
+     */
     public function getValues();
 }

@@ -27,21 +27,23 @@ class MenuBuilder
 
     public function createMainMenu(Request $request)
     {
-        $menu = $this->factory->createItem('root');
+        $menu = $this->factory->createItem('root',array('childrenAttributes'=>array('class'=>'nav nav-sidebar')));
 
-        $menu->setAttribute('class','nav nav-sidebar');
         foreach($this->items as $id=>$item){
             $menu->addChild($id, $item);
         }
         return $menu;
     }
 
-    public function addItem($id,$label,$route){
-        $this->items[$id] = array('route'=> $route,'label'=>$label);
-    }
-
+    /**
+     * For each child bundle, we add its menu
+     * @param MenuFillerInterface $id
+     */
     public function addFiller(MenuFillerInterface $id){
-        $id->getValues();
+        $values = $id->getValues();
+        foreach($values as $id=>$value){
+            $this->items[$id]= $value;
+        }
     }
 
 

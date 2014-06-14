@@ -1,6 +1,5 @@
 services:
     cloudsandwich.menufiller.files:
         class: CloudSandwich\FileBundle\Menu\MenuFiller
-        arguments: ["@cloudsandwich.menubuilder"]
         tags:
             - { name: cloudsandwich.menufiller }
