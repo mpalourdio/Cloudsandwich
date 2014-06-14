@@ -8,20 +8,22 @@
 namespace CloudSandwich\FileBundle\Menu;
 
 use CloudSandwich\CoreBundle\Menu\MenuFillerInterface;
+use Symfony\Component\Translation\Translator;
 
 class MenuFiller implements MenuFillerInterface
 {
-    public function __construct()
-    {
+    private $translator;
 
+    public function __construct(Translator $translator)
+    {
+        $this->translator = $translator;
     }
 
-    public function getValues(){
+    public function getValues()
+    {
         return array(
-            'files'=>array('label'=>'menu de test','attributes'=>array('class'=>'nav-header')),
-            'test'=>array('label'=>'menu de test','route'=>'cloudsandwich_core_default_index'),
-            'second'=>array('label'=>'Deuxième','route'=>'cloudsandwich_core_default_authindex'),
-            'third'=>array('label'=>'Troisieme','route'=>'cloudsandwich_file_default_index'),
+            'files'       => array('label' => $this->translator->trans('file.menu.header'), 'attributes' => array('class' => 'nav-header')),
+            'files.index' => array('label' => $this->translator->trans('file.menu.index'), 'route' => 'cloudsandwich_file_default_index', 'attributes' => array('icon' => 'fa-folder')),
         );
     }
 

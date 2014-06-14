@@ -41,7 +41,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @CFG\Route("/auth")
+     * @CFG\Route("/auth/")
      * @CFG\Template()
      */
     public function authindexAction()

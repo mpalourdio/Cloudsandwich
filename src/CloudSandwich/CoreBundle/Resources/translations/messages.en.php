@@ -1,4 +1,7 @@
 <?php
 return array(
-    'core.backpublic' => 'Back to public site',
+    'core'=>array(
+        'backpublic'=> 'Public site',
+        'menu.index'=>'Dashboard',
+    ),
 );

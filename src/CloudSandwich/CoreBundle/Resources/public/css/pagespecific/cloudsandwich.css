@@ -52,10 +52,18 @@ body {
     padding-right: 20px;
     padding-left: 20px;
 }
+.nav-sidebar > li.nav-header {
+    padding:10px;
+}
 .nav-sidebar > .current > a {
     color: #fff;
     background-color: #428bca;
 }
+.nav-sidebar > .current > a:hover {
+    color: #000000;
+    background-color: #428bca;
+}
+
 .nav-sidebar > li.nav-header{
     text-transform: uppercase;
     font-weight: bold;

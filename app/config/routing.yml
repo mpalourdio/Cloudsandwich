@@ -5,7 +5,7 @@ cloud_sandwich_core:
 
 _auth:
     resource: routing_auth.yml
-    prefix: /auth
+    prefix: /auth/
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
