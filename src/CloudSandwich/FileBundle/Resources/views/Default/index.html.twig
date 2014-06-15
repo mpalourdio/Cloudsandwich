@@ -1,4 +1,31 @@
- {% extends "@CloudSandwichCore/auth_layout.html.twig" %}
- {% block body %}Hello {{ name }}!
+{% extends "@CloudSandwichFile/layout.html.twig" %}
+{% block body %}
+<div class="cloudsandwich_filebrowser">
 
- {% endblock %}
+</div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            loadFolder('/')
+            function loadFolder(path){
+                console.log('loading '+path);
+                $.post( "{{ path("cloudsandwich_file_default_files") }}",{ folder: path })
+                .done(function(data) {
+                    $( ".cloudsandwich_filebrowser").html( data );
+
+                    $(".cloudsandwich_filebrowser > ul > li.folder a").unbind('click');
+                    $(".cloudsandwich_filebrowser > ul > li.folder a").click(function(){
+                        loadFolder($(this).data('folder'));
+
+                    });
+
+                        })
+                .fail(function(xhr) {
+                    console.error(xhr)
+                });
+            }
+        });
+    </script>
+{% endblock %}

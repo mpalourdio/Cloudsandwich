@@ -1,0 +1,22 @@
+.cloudsandwich_filebrowser > ul{
+    list-style-type: none;
+    padding:0;
+    margin:0;
+}
+.cloudsandwich_filebrowser > ul > li{
+
+    padding:5px;
+    border-bottom: 1px solid darkgray;
+}
+.cloudsandwich_filebrowser > ul > li.folder{
+
+}
+.cloudsandwich_filebrowser > ul > li.file{
+
+}
+.cloudsandwich_filebrowser > ul > li > a{
+
+}
+.cloudsandwich_filebrowser > ul > li > a:hover{
+    text-decoration: none;
+}

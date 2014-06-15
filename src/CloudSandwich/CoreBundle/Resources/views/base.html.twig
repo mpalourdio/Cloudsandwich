@@ -15,6 +15,10 @@
 <body>
 
     {% block content %}{% endblock %}
-
+    {% block javascripts %}
+        {% javascripts 'bundles/cloudsandwichcore/js/jquery-2.1.1.min.js' 'bundles/cloudsandwichcore/js/*' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
 </body>
 </html>

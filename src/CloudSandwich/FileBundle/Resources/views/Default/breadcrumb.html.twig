@@ -1,0 +1,8 @@
+<ol class="breadcrumb">
+    <li><i class="fa fa-home"></i></li>
+    {% for folder in folders %}
+        {% if folder != '' %}
+            <li>{{ folder }}</li>
+        {% endif %}
+    {% endfor %}
+</ol>

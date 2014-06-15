@@ -9,7 +9,7 @@ web/uploads/*
 web/bundles/*
 .idea/*
 bin/*
-
+files/*
 # Configuration files
 app/config/parameters.ini
 app/config/parameters.yml

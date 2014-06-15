@@ -4,3 +4,17 @@ services:
         arguments: [@translator]
         tags:
             - { name: cloudsandwich.menufiller }
+
+    cloudsandwich.filemanager:
+        class: CloudSandwich\FileBundle\Manager\FileManager
+        arguments: ["@translator","@security.context"]
+
+    cloudsandwich.openers.default:
+        class: CloudSandwich\FileBundle\Opener\DefaultOpener
+        tags:
+            - { name: cloudsandwich.fileopener}
+
+    cloudsandwich.openers.image:
+        class: CloudSandwich\FileBundle\Opener\ImageOpener
+        tags:
+            - { name: cloudsandwich.fileopener}
