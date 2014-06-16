@@ -99,10 +99,13 @@ class FileManager
     }
 
     public function getFile($folder,$file){
+
         $file = new File($this->rootPath.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$file);
         //$content =    readfile($file->getRealPath());
 
         $fp = fopen($file->getRealPath(), "rb");
+
+
         $str = stream_get_contents($fp);
         fclose($fp);
 

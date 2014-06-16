@@ -47,11 +47,13 @@ class DefaultController extends Controller
     }
 
     /**
-     * @CFG\Route("/serve/{file}/{folder}", requirements={"folder" = ".+"}, defaults={"folder" = ""})
+     * @CFG\Route("/serve")
      * @CFG\Template()
      */
-    public function serveAction($folder=DIRECTORY_SEPARATOR,$file)
+    public function serveAction(Request $request)
     {
+        $folder = $request->get("folder");
+        $file = $request->get('file');
         $fm =  $this->get("cloudsandwich.filemanager");
         return $fm->getFile($folder,$file);
     }
