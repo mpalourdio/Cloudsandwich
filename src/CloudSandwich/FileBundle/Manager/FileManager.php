@@ -7,10 +7,8 @@
  */
 namespace CloudSandwich\FileBundle\Manager;
 
-use CloudSandwich\CoreBundle\Entity\User;
 use CloudSandwich\FileBundle\Opener\OpenerInterface;
 
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +36,10 @@ class FileManager
         $usr = $this->context->getToken()->getUser();
         $request = Request::createFromGlobals();
 
-        $this->rootPath = realpath($request->server->get('DOCUMENT_ROOT').$request->getBasePath().'/../files/'.$usr->getId());
+        $root = realpath(dirname(__FILE__));
+        $root = str_replace(__NAMESPACE__,'',$root);
+
+        $this->rootPath = realpath($root.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$usr->getId());
     }
 
     /**
@@ -53,31 +54,35 @@ class FileManager
     }
 
     public function getBreadCrumb($requestedFolder){
-        $folders = explode('/',str_replace($this->rootPath,'',$requestedFolder));
+        $folders = explode(DIRECTORY_SEPARATOR,str_replace($this->rootPath,'',$requestedFolder));
         return $folders;
     }
 
     public function listDirectory($requestedFolder){
         $filesToDisplay=array();
 
-        $folder = realpath($this->rootPath.'/'.$requestedFolder);
+        $folder = realpath($this->rootPath.DIRECTORY_SEPARATOR.$requestedFolder);
+
+        if($folder==$this->rootPath)
+            $folder.=DIRECTORY_SEPARATOR;
+        $requestedFolder = str_replace($this->rootPath.DIRECTORY_SEPARATOR,'',$folder);
 
         if(strlen(realpath($this->rootPath))>strlen(realpath($folder)))
             throw new AccessDeniedException();
 
-        if($this->rootPath!=$folder)
-            $filesToDisplay['folders'][] = array('name' => '..','link'=>'/'.$requestedFolder.'/..');
+        if($this->rootPath!=realpath($folder))
+            $filesToDisplay['folders'][] = array('name' => '..','link'=>$requestedFolder.DIRECTORY_SEPARATOR.'..');
 
         $finder = new Finder();
         $finder->depth('== 0');
         $finder->directories()->in($folder);
         foreach ($finder as $file) {
-            $filesToDisplay['folders'][] = array('name' => $file->getFilename(),'link'=>'/'.$requestedFolder.'/'.$file->getRelativePathname());
+            $filesToDisplay['folders'][] = array('name' => $file->getFilename(),'link'=>$requestedFolder.DIRECTORY_SEPARATOR.$file->getRelativePathname());
         }
 
         $finder->files();
         foreach ($finder as $file) {
-            $file = new File($this->rootPath.'/'.$requestedFolder.'/'.$file->getFilename());
+            $file = new File($this->rootPath.DIRECTORY_SEPARATOR.$requestedFolder.DIRECTORY_SEPARATOR.$file->getFilename());
             $mimetype= $file->getMimeType();
             /** @var OpenerInterface $opener */
             if(isset($this->openers[$mimetype]))
@@ -85,9 +90,26 @@ class FileManager
             else
                 $opener = $this->openers['default'];
 
+            $opener->initialize($requestedFolder,$file->getFilename(),$file);
+
             $filesToDisplay['files'][] =array('template'=>$opener->getTemplate(),'vars'=>$opener->getVarsForTemplate($requestedFolder,$file->getFilename()));
         }
 
         return $filesToDisplay;
     }
+
+    public function getFile($folder,$file){
+        $file = new File($this->rootPath.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$file);
+        //$content =    readfile($file->getRealPath());
+
+        $fp = fopen($file->getRealPath(), "rb");
+        $str = stream_get_contents($fp);
+        fclose($fp);
+
+        $response = new Response($str, 200);
+        $response->headers->set('Content-Type', $file->getMimeType());
+
+        return $response;
+    }
+
 }

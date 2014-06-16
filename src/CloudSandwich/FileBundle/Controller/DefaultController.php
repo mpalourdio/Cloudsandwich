@@ -2,20 +2,15 @@
 
 namespace CloudSandwich\FileBundle\Controller;
 
-use CloudSandwich\CoreBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as CFG;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DefaultController extends Controller
 {
     /**
-     * @CFG\Route("/hello")
+     * @CFG\Route("/")
      * @CFG\Template()
      */
     public function indexAction()
@@ -23,7 +18,7 @@ class DefaultController extends Controller
         return array();
     }
     /**
-     * @CFG\Route("/files")
+     * @CFG\Route("/list")
      * @CFG\Template()
      */
     public function filesAction(Request $request)
@@ -50,4 +45,15 @@ class DefaultController extends Controller
         $html.='</ul>';
         return new Response($html);
     }
+
+    /**
+     * @CFG\Route("/serve/{file}/{folder}", requirements={"folder" = ".+"}, defaults={"folder" = ""})
+     * @CFG\Template()
+     */
+    public function serveAction($folder=DIRECTORY_SEPARATOR,$file)
+    {
+        $fm =  $this->get("cloudsandwich.filemanager");
+        return $fm->getFile($folder,$file);
+    }
+
 }

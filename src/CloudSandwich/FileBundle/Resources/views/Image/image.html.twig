@@ -1,3 +1,21 @@
 <li class="file">
-    <a href="{{ link }}" target="_blank"><i class="fa fa-image"></i> {{ name }}</a>
+    <a href="#" data-toggle="modal" data-target="#myModal-{{ modalname }}" ><i class="fa fa-image"></i> {{ name }}</a>
+
+    <div class="modal fade" id="myModal-{{ modalname }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">{{ folder }} - {{ name }}</h4>
+                </div>
+                <div class="modal-body">
+                    <img style="max-width:100%;max-height:80%;" src="{{ path("cloudsandwich_file_default_serve",{'file':name,'folder':folder}) }}" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </li>

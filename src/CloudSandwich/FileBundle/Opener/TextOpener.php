@@ -7,28 +7,28 @@
  */
 namespace CloudSandwich\FileBundle\Opener;
 
-class ImageOpener extends AbstractOpener implements OpenerInterface
+class TextOpener extends AbstractOpener implements OpenerInterface
 {
     public function getMimeTypes()
     {
         return array(
-            'image/jpeg','image/png',
+            'text/plain',
         );
     }
 
     public function getTemplate()
     {
-        return '@CloudSandwichFile/Image/image.html.twig';
+        return '@CloudSandwichFile/Text/text.html.twig';
     }
 
     public function getVarsForTemplate()
     {
+
         return array(
             'name'=>$this->fileName,
             'modalname'=>str_replace('.','',$this->fileName),
             'folder'=>$this->requestedFolder
         );
     }
-
 
 }

@@ -8,7 +8,7 @@
     {{ parent() }}
     <script>
         $(document).ready(function(){
-            loadFolder('/')
+            loadFolder('')
             function loadFolder(path){
                 console.log('loading '+path);
                 $.post( "{{ path("cloudsandwich_file_default_files") }}",{ folder: path })

@@ -14,8 +14,9 @@ use Symfony\Component\HttpFoundation\File\File;
  * Class ImageOpener
  * @package CloudSandwich\FileBundle\Opener
  */
-class DefaultOpener implements OpenerInterface
+class DefaultOpener extends AbstractOpener implements OpenerInterface
 {
+
     public function getMimeTypes()
     {
         return array('default');
@@ -26,10 +27,11 @@ class DefaultOpener implements OpenerInterface
         return '@CloudSandwichFile/Default/file.html.twig';
     }
 
-    public function getVarsForTemplate($requestedFolder,$fileName)
+    public function getVarsForTemplate()
     {
         return array(
-            'name'=>$fileName
+            'name'=>$this->fileName,
+            'mime'=>$this->file->getMimeType()
         );
     }
 
