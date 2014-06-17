@@ -20,4 +20,6 @@ interface OpenerInterface
 
     public function getVarsForTemplate();
 
+    public function getFile();
+
 }

@@ -54,7 +54,8 @@ class FileManager
     }
 
     public function getBreadCrumb($requestedFolder){
-        $folders = explode(DIRECTORY_SEPARATOR,str_replace($this->rootPath,'',$requestedFolder));
+        $folder = realpath($this->rootPath.DIRECTORY_SEPARATOR.$requestedFolder);
+        $folders = explode(DIRECTORY_SEPARATOR,str_replace($this->rootPath,'',$folder));
         return $folders;
     }
 
@@ -103,16 +104,15 @@ class FileManager
         $file = new File($this->rootPath.DIRECTORY_SEPARATOR.$folder.DIRECTORY_SEPARATOR.$file);
         //$content =    readfile($file->getRealPath());
 
-        $fp = fopen($file->getRealPath(), "rb");
+        $mimetype = $file->getMimeType();
+        if(isset($this->openers[$mimetype]))
+            $opener = $this->openers[$mimetype];
+        else
+            $opener = $this->openers['default'];
+        $opener->initialize($folder,$file->getFilename(),$file);
 
 
-        $str = stream_get_contents($fp);
-        fclose($fp);
-
-        $response = new Response($str, 200);
-        $response->headers->set('Content-Type', $file->getMimeType());
-
-        return $response;
+        return $opener->getFile($file);
     }
 
 }

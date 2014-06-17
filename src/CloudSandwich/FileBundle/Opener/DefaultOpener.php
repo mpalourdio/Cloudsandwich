@@ -31,7 +31,9 @@ class DefaultOpener extends AbstractOpener implements OpenerInterface
     {
         return array(
             'name'=>$this->fileName,
-            'mime'=>$this->file->getMimeType()
+            'mime'=>$this->file->getMimeType(),
+            'folder'=>$this->requestedFolder,
+            'size'=>$this->getReadableSize()
         );
     }
 

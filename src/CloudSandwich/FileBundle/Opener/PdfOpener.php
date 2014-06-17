@@ -7,28 +7,29 @@
  */
 namespace CloudSandwich\FileBundle\Opener;
 
-class TextOpener extends AbstractOpener implements OpenerInterface
+class PdfOpener extends AbstractOpener implements OpenerInterface
 {
     public function getMimeTypes()
     {
         return array(
-            'text/plain',
+            'application/pdf',
         );
     }
 
     public function getTemplate()
     {
-        return '@CloudSandwichFile/Text/text.html.twig';
+        return '@CloudSandwichFile/Pdf/pdf.html.twig';
     }
 
     public function getVarsForTemplate()
     {
-
         return array(
             'name'=>$this->fileName,
             'modalname'=>str_replace('.','',$this->fileName),
+            'folder'=>$this->requestedFolder,
             'size'=>$this->getReadableSize(),
-            'folder'=>$this->requestedFolder
         );
     }
+
+
 }

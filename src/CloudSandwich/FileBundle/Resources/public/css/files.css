@@ -1,22 +1,17 @@
-.cloudsandwich_filebrowser > ul{
-    list-style-type: none;
-    padding:0;
-    margin:0;
+.cloudsandwich_filebrowser > table > thead > tr > th.icon-col{
+    width:10px;
 }
-.cloudsandwich_filebrowser > ul > li{
 
-    padding:5px;
-    border-bottom: 1px solid darkgray;
-}
-.cloudsandwich_filebrowser > ul > li.folder{
+.cloudsandwich_filebrowser > table > thead > tr > th.file-col{
 
 }
-.cloudsandwich_filebrowser > ul > li.file{
 
+.cloudsandwich_filebrowser > table > thead > tr > th.size-col{
+    width:45px;
 }
-.cloudsandwich_filebrowser > ul > li > a{
 
+.cloudsandwich_filebrowser > table > thead > tr > th.actions-col{
+    width:45px;
 }
-.cloudsandwich_filebrowser > ul > li > a:hover{
-    text-decoration: none;
-}
+
+

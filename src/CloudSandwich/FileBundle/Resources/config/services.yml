@@ -23,3 +23,7 @@ services:
         class: CloudSandwich\FileBundle\Opener\TextOpener
         tags:
             - { name: cloudsandwich.fileopener}
+    cloudsandwich.openers.pdf:
+        class: CloudSandwich\FileBundle\Opener\PdfOpener
+        tags:
+            - { name: cloudsandwich.fileopener}

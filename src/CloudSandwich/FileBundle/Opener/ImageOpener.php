@@ -7,6 +7,8 @@
  */
 namespace CloudSandwich\FileBundle\Opener;
 
+use Symfony\Component\Finder\SplFileInfo;
+
 class ImageOpener extends AbstractOpener implements OpenerInterface
 {
     public function getMimeTypes()
@@ -26,7 +28,8 @@ class ImageOpener extends AbstractOpener implements OpenerInterface
         return array(
             'name'=>$this->fileName,
             'modalname'=>str_replace('.','',$this->fileName),
-            'folder'=>$this->requestedFolder
+            'folder'=>$this->requestedFolder,
+            'size'=>$this->getReadableSize()
         );
     }
 
