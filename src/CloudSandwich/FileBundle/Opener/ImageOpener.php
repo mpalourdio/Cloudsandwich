@@ -8,6 +8,7 @@
 namespace CloudSandwich\FileBundle\Opener;
 
 use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\HttpFoundation\Response;
 
 class ImageOpener extends AbstractOpener implements OpenerInterface
 {
@@ -33,5 +34,15 @@ class ImageOpener extends AbstractOpener implements OpenerInterface
         );
     }
 
+    public function getFile()
+    {
+        $fp = fopen($this->file->getRealPath(), "rb");
 
+        $str = stream_get_contents($fp);
+        fclose($fp);
+
+        $response = new Response($str, 200);
+        $response->headers->set('Content-Type', $this->file->getMimetype());
+        return $response;
+    }
 }

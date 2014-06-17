@@ -2,4 +2,16 @@
  {% block stylesheets %}
 {{ parent() }}
      <link href="{{ asset("bundles/cloudsandwichfile/css/files.css") }}" rel="stylesheet">
+     <link href="{{ asset("bundles/cloudsandwichfile/js/fancybox/jquery.fancybox.css") }}" rel="stylesheet">
+
  {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('bundles/cloudsandwichfile/js/fancybox/jquery.fancybox.pack.js') }}"></script>
+    <script src="{{ asset('bundles/cloudsandwichfile/js/fancybox/jquery.fancybox.js') }}"></script>
+    <script src="{{ asset('bundles/cloudsandwichfile/js/fancybox/helpers/jquery.fancybox-buttons.js') }}"></script>
+    <script src="{{ asset('bundles/cloudsandwichfile/js/fancybox/helpers/jquery.fancybox-media.js') }}"></script>
+    <script src="{{ asset('bundles/cloudsandwichfile/js/fancybox/helpers/jquery.fancybox-thumbs.js') }}"></script>
+
+{% endblock %}

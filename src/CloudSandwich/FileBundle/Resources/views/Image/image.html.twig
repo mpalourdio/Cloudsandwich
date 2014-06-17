@@ -1,3 +1,3 @@
 {% extends "@CloudSandwichFile/Default/file.html.twig" %}
 {% block fileicon %}<i class="fa fa-image"></i>{% endblock %}
-{% block filename %}<a href="{{ path("cloudsandwich_file_default_serve",{'file':name,'folder':folder}) }}" > {{ name }}</a>{% endblock %}
+{% block filename %}<a href="{{ path("cloudsandwich_file_default_serve",{'file':name,'folder':folder}) }}" rel="current_page" class="cloudsandwichFancybox"> {{ name }}</a>{% endblock %}

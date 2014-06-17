@@ -33,13 +33,10 @@ class FileManager
         $this->translator=$translator;
         $this->context=$context;
 
-        $usr = $this->context->getToken()->getUser();
-        $request = Request::createFromGlobals();
-
         $root = realpath(dirname(__FILE__));
         $root = str_replace(__NAMESPACE__,'',$root);
 
-        $this->rootPath = realpath($root.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'files'.DIRECTORY_SEPARATOR.$usr->getId());
+        $this->rootPath = realpath($root.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'files');
     }
 
     /**
