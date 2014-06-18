@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractOpener implements OpenerInterface
 {
-
     protected $requestedFolder;
     protected $fileName;
     protected $file;
@@ -22,16 +21,25 @@ abstract class AbstractOpener implements OpenerInterface
 
     abstract function getTemplate();
 
-    public function initialize($alias,$requestedFolder, $fileName, File $file)
+    /**
+     * @param      $alias
+     * @param      $requestedFolder
+     * @param      $fileName
+     * @param File $file
+     */
+    public function initialize($alias, $requestedFolder, $fileName, File $file)
     {
         $this->file            = $file;
         $this->fileName        = $fileName;
         $this->requestedFolder = $requestedFolder;
-        $this->alias = $alias;
+        $this->alias           = $alias;
     }
 
     abstract function getVarsForTemplate();
 
+    /**
+     * @return Response
+     */
     public function getFile()
     {
         $fp = fopen($this->file->getRealPath(), "rb");
@@ -47,6 +55,9 @@ abstract class AbstractOpener implements OpenerInterface
         return $response;
     }
 
+    /**
+     * @return string
+     */
     protected function getReadableSize()
     {
         $size = $this->file->getSize();

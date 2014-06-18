@@ -13,7 +13,10 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class OpenerCompilerPass implements CompilerPassInterface
 {
-
+    /**
+     * @param  ContainerBuilder $container
+     * @return null|void
+     */
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('cloudsandwich.filemanager')) {

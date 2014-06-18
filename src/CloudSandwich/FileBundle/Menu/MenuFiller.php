@@ -15,28 +15,37 @@ class MenuFiller implements MenuFillerInterface
     private $translator;
     private $folders;
 
-    public function __construct(Translator $translator,$folders)
+    /**
+     * @param Translator $translator
+     * @param            $folders
+     */
+    public function __construct(Translator $translator, $folders)
     {
         $this->translator = $translator;
-        $this->folders = $folders;
+        $this->folders    = $folders;
     }
 
+    /**
+     * @return array
+     */
     public function getValues()
     {
         $menu = [
-            'files'       => [
+            'files' => [
                 'label'      => $this->translator->trans('file.menu.header'),
                 'attributes' => ['class' => 'nav-header']
-            ]];
+            ]
+        ];
 
-        foreach($this->folders as $alias=>$path){
-            $menu['files.index'.$alias] = [
-                'label'      => $alias,
-                'route'      => 'cloudsandwich_file_default_index',
-                'routeParameters'=>['alias'=>$alias],
-                'attributes' => ['icon' => 'fa-folder']
+        foreach ($this->folders as $alias => $path) {
+            $menu['files.index' . $alias] = [
+                'label'           => $alias,
+                'route'           => 'cloudsandwich_file_default_index',
+                'routeParameters' => ['alias' => $alias],
+                'attributes'      => ['icon' => 'fa-folder']
             ];
         }
+
         return $menu;
     }
 }

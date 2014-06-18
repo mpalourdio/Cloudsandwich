@@ -15,17 +15,25 @@ namespace CloudSandwich\FileBundle\Opener;
  */
 class DefaultOpener extends AbstractOpener implements OpenerInterface
 {
-
+    /**
+     * @return array
+     */
     public function getMimeTypes()
     {
         return ['default'];
     }
 
+    /**
+     * @return string
+     */
     public function getTemplate()
     {
         return '@CloudSandwichFile/Default/file.html.twig';
     }
 
+    /**
+     * @return array
+     */
     public function getVarsForTemplate()
     {
         return [

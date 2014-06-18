@@ -9,6 +9,9 @@ namespace CloudSandwich\FileBundle\Opener;
 
 class TextOpener extends AbstractOpener implements OpenerInterface
 {
+    /**
+     * @return array
+     */
     public function getMimeTypes()
     {
         return [
@@ -16,11 +19,17 @@ class TextOpener extends AbstractOpener implements OpenerInterface
         ];
     }
 
+    /**
+     * @return string
+     */
     public function getTemplate()
     {
         return '@CloudSandwichFile/Text/text.html.twig';
     }
 
+    /**
+     * @return array
+     */
     public function getVarsForTemplate()
     {
 
