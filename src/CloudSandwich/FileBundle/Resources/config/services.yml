@@ -1,3 +1,6 @@
+parameters:
+    cloudsandwich.filebundle.controller.default.class: CloudSandwich\FileBundle\Controller\DefaultController
+
 services:
     cloudsandwich.menufiller.files:
         class: CloudSandwich\FileBundle\Menu\MenuFiller
@@ -27,3 +30,6 @@ services:
         class: CloudSandwich\FileBundle\Opener\PdfOpener
         tags:
             - { name: cloudsandwich.fileopener}
+    cloudsandwich.controller.default:
+        class: '%cloudsandwich.filebundle.controller.default.class%'
+        arguments: [@cloudsandwich.filemanager]
