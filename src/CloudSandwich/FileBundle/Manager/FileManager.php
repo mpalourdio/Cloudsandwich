@@ -24,20 +24,17 @@ class FileManager
     private $translator;
     private $rootPath;
     private $openers = [];
+    private $aliases = [];
 
     /**
      * @param Translator      $translator
      * @param SecurityContext $context
      */
-    public function __construct(Translator $translator, SecurityContext $context)
+    public function __construct(Translator $translator, SecurityContext $context,$folders)
     {
         $this->translator = $translator;
         $this->context    = $context;
-
-        $root = realpath(dirname(__FILE__));
-        $root = str_replace(__NAMESPACE__, '', $root);
-
-        $this->rootPath = realpath($root . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'files');
+        $this->aliases = $folders;
     }
 
     /**
@@ -53,30 +50,30 @@ class FileManager
         }
     }
 
-    public function getBreadCrumb($requestedFolder)
+    public function getBreadCrumb($alias,$requestedFolder)
     {
-        $folder  = realpath($this->rootPath . DIRECTORY_SEPARATOR . $requestedFolder);
-        $folders = explode(DIRECTORY_SEPARATOR, str_replace($this->rootPath, '', $folder));
+        $folder  = realpath($this->aliases[$alias] . DIRECTORY_SEPARATOR . $requestedFolder);
+        $folders = explode(DIRECTORY_SEPARATOR, str_replace($this->aliases[$alias], '', $folder));
 
         return $folders;
     }
 
-    public function listDirectory($requestedFolder)
+    public function listDirectory($alias,$requestedFolder)
     {
         $filesToDisplay = [];
 
-        $folder = realpath($this->rootPath . DIRECTORY_SEPARATOR . $requestedFolder);
+        $folder = realpath($this->aliases[$alias] . DIRECTORY_SEPARATOR . $requestedFolder);
 
-        if ($folder == $this->rootPath) {
+        if ($folder == $this->aliases[$alias]) {
             $folder .= DIRECTORY_SEPARATOR;
         }
-        $requestedFolder = str_replace($this->rootPath . DIRECTORY_SEPARATOR, '', $folder);
+        $requestedFolder = str_replace($this->aliases[$alias] . DIRECTORY_SEPARATOR, '', $folder);
 
-        if (strlen(realpath($this->rootPath)) > strlen(realpath($folder))) {
+        if (strlen(realpath($this->aliases[$alias])) > strlen(realpath($folder))) {
             throw new AccessDeniedException();
         }
 
-        if ($this->rootPath != realpath($folder))
+        if ($this->aliases[$alias] != realpath($folder))
             $filesToDisplay['folders'][] = ['name' => '..', 'link' => $requestedFolder . DIRECTORY_SEPARATOR . '..'];
 
         $finder = new Finder();
@@ -88,7 +85,7 @@ class FileManager
 
         $finder->files();
         foreach ($finder as $file) {
-            $file     = new File($this->rootPath . DIRECTORY_SEPARATOR . $requestedFolder . DIRECTORY_SEPARATOR . $file->getFilename());
+            $file     = new File($this->aliases[$alias] . DIRECTORY_SEPARATOR . $requestedFolder . DIRECTORY_SEPARATOR . $file->getFilename());
             $mimetype = $file->getMimeType();
             /** @var OpenerInterface $opener */
             if (isset($this->openers[$mimetype]))
@@ -96,7 +93,7 @@ class FileManager
             else
                 $opener = $this->openers['default'];
 
-            $opener->initialize($requestedFolder, $file->getFilename(), $file);
+            $opener->initialize($alias,$requestedFolder, $file->getFilename(), $file);
 
             $filesToDisplay['files'][] = ['template' => $opener->getTemplate(), 'vars' => $opener->getVarsForTemplate($requestedFolder, $file->getFilename())];
         }
@@ -104,10 +101,10 @@ class FileManager
         return $filesToDisplay;
     }
 
-    public function getFile($folder, $file)
+    public function getFile($alias,$folder, $file)
     {
 
-        $file = new File($this->rootPath . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $file);
+        $file = new File($this->aliases[$alias] . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $file);
         //$content =    readfile($file->getRealPath());
 
         $mimetype = $file->getMimeType();
@@ -115,7 +112,7 @@ class FileManager
             $opener = $this->openers[$mimetype];
         else
             $opener = $this->openers['default'];
-        $opener->initialize($folder, $file->getFilename(), $file);
+        $opener->initialize($alias,$folder, $file->getFilename(), $file);
 
         return $opener->getFile($file);
     }

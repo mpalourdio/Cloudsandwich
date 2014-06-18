@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     protected $fileManager;
-
     /**
      * @param FileManager $fileManager
      */
@@ -22,24 +21,22 @@ class DefaultController extends Controller
     {
         $this->fileManager = $fileManager;
     }
-
     /**
-     * @CFG\Route("/")
+     * @CFG\Route("/{alias}/")
      * @CFG\Template()
      */
-    public function indexAction()
+    public function indexAction($alias)
     {
-        return [];
+        return ['alias'=>$alias];
     }
 
     /**
-     * @CFG\Route("/list")
-     * @CFG\Template()
+     * @CFG\Route("/{alias}/list")
      */
-    public function filesAction(Request $request)
+    public function filesAction(Request $request,$alias)
     {
         $html     = "";
-        $filelist = $this->fileManager->listDirectory($request->get('folder'));
+        $filelist = $this->fileManager->listDirectory($alias,$request->get('folder'));
         //Render list of folders
         if (isset($filelist['folders'])) {
             foreach ($filelist['folders'] as $folder) {
@@ -62,31 +59,29 @@ class DefaultController extends Controller
     }
 
     /**
-     * @CFG\Route("/breadcrumb")
+     * @CFG\Route("/{alias}/breadcrumb")
      * @CFG\Template()
      */
-    public function breadcrumbAction(Request $request)
+    public function breadcrumbAction(Request $request,$alias)
     {
         $html       = "";
-        $breadcrumb = $this->fileManager->getBreadCrumb($request->get('folder'));
+        $breadcrumb = $this->fileManager->getBreadCrumb($alias,$request->get('folder'));
         $html .= $this->render(
             '@CloudSandwichFile/Default/breadcrumb.html.twig',
             ['folders' => $breadcrumb]
-        )
-            ->getContent();
+        )->getContent();
 
         return new Response($html);
     }
 
     /**
-     * @CFG\Route("/serve")
-     * @CFG\Template()
+     * @CFG\Route("/{alias}/serve")
      */
-    public function serveAction(Request $request)
+    public function serveAction(Request $request,$alias)
     {
         $folder = $request->get("folder");
         $file   = $request->get('file');
 
-        return $this->fileManager->getFile($folder, $file);
+        return $this->fileManager->getFile($alias,$folder, $file);
     }
 }

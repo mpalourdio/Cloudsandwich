@@ -16,16 +16,18 @@ abstract class AbstractOpener implements OpenerInterface
     protected $requestedFolder;
     protected $fileName;
     protected $file;
+    protected $alias;
 
     abstract function getMimeTypes();
 
     abstract function getTemplate();
 
-    public function initialize($requestedFolder, $fileName, File $file)
+    public function initialize($alias,$requestedFolder, $fileName, File $file)
     {
         $this->file            = $file;
         $this->fileName        = $fileName;
         $this->requestedFolder = $requestedFolder;
+        $this->alias = $alias;
     }
 
     abstract function getVarsForTemplate();

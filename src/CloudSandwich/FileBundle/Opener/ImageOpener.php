@@ -30,7 +30,8 @@ class ImageOpener extends AbstractOpener implements OpenerInterface
             'name'      => $this->fileName,
             'modalname' => str_replace('.', '', $this->fileName),
             'folder'    => $this->requestedFolder,
-            'size'      => $this->getReadableSize()
+            'size'      => $this->getReadableSize(),
+            'alias'=>$this->alias,
         ];
     }
 

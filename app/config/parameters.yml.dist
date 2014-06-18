@@ -17,3 +17,6 @@ parameters:
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    cloudsandwich_folders:
+        {images: D:\cs\images, documents: D:\cs\documents}

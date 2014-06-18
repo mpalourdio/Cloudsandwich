@@ -13,24 +13,30 @@ use Symfony\Component\Translation\Translator;
 class MenuFiller implements MenuFillerInterface
 {
     private $translator;
+    private $folders;
 
-    public function __construct(Translator $translator)
+    public function __construct(Translator $translator,$folders)
     {
         $this->translator = $translator;
+        $this->folders = $folders;
     }
 
     public function getValues()
     {
-        return [
+        $menu = [
             'files'       => [
                 'label'      => $this->translator->trans('file.menu.header'),
                 'attributes' => ['class' => 'nav-header']
-            ],
-            'files.index' => [
-                'label'      => $this->translator->trans('file.menu.index'),
+            ]];
+
+        foreach($this->folders as $alias=>$path){
+            $menu['files.index'.$alias] = [
+                'label'      => $alias,
                 'route'      => 'cloudsandwich_file_default_index',
+                'routeParameters'=>['alias'=>$alias],
                 'attributes' => ['icon' => 'fa-folder']
-            ],
-        ];
+            ];
+        }
+        return $menu;
     }
 }

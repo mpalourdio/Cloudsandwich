@@ -16,7 +16,7 @@ interface OpenerInterface
 
     public function getTemplate();
 
-    public function initialize($requestedFolder, $fileName, File $file);
+    public function initialize($alias,$requestedFolder, $fileName, File $file);
 
     public function getVarsForTemplate();
 

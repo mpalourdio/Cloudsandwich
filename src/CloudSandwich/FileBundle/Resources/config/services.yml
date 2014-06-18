@@ -4,13 +4,13 @@ parameters:
 services:
     cloudsandwich.menufiller.files:
         class: CloudSandwich\FileBundle\Menu\MenuFiller
-        arguments: [@translator]
+        arguments: [@translator,%cloudsandwich_folders%]
         tags:
             - { name: cloudsandwich.menufiller }
 
     cloudsandwich.filemanager:
         class: CloudSandwich\FileBundle\Manager\FileManager
-        arguments: ["@translator","@security.context"]
+        arguments: ["@translator","@security.context",%cloudsandwich_folders%]
 
     cloudsandwich.openers.default:
         class: CloudSandwich\FileBundle\Opener\DefaultOpener
