@@ -21,10 +21,16 @@ class MenuFiller implements MenuFillerInterface
 
     public function getValues()
     {
-        return array(
-            'files'       => array('label' => $this->translator->trans('file.menu.header'), 'attributes' => array('class' => 'nav-header')),
-            'files.index' => array('label' => $this->translator->trans('file.menu.index'), 'route' => 'cloudsandwich_file_default_index', 'attributes' => array('icon' => 'fa-folder')),
-        );
+        return [
+            'files'       => [
+                'label'      => $this->translator->trans('file.menu.header'),
+                'attributes' => ['class' => 'nav-header']
+            ],
+            'files.index' => [
+                'label'      => $this->translator->trans('file.menu.index'),
+                'route'      => 'cloudsandwich_file_default_index',
+                'attributes' => ['icon' => 'fa-folder']
+            ],
+        ];
     }
-
 }

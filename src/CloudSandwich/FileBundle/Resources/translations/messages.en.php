@@ -1,7 +1,7 @@
 <?php
-return array(
-    'file'=>array(
+return [
+    'file' => [
         'menu.header' => 'File manager',
-        'menu.index'=>'My Files',
-    )
-);
+        'menu.index'  => 'My Files',
+    ]
+];

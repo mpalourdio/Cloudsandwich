@@ -11,9 +11,9 @@ class PdfOpener extends AbstractOpener implements OpenerInterface
 {
     public function getMimeTypes()
     {
-        return array(
+        return [
             'application/pdf',
-        );
+        ];
     }
 
     public function getTemplate()
@@ -23,13 +23,11 @@ class PdfOpener extends AbstractOpener implements OpenerInterface
 
     public function getVarsForTemplate()
     {
-        return array(
-            'name'=>$this->fileName,
-            'modalname'=>str_replace('.','',$this->fileName),
-            'folder'=>$this->requestedFolder,
-            'size'=>$this->getReadableSize(),
-        );
+        return [
+            'name'      => $this->fileName,
+            'modalname' => str_replace('.', '', $this->fileName),
+            'folder'    => $this->requestedFolder,
+            'size'      => $this->getReadableSize(),
+        ];
     }
-
-
 }

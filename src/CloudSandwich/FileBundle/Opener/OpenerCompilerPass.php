@@ -20,12 +20,11 @@ class OpenerCompilerPass implements CompilerPassInterface
             return null;
         }
 
-        $definition = $container->getDefinition('cloudsandwich.filemanager');
+        $definition     = $container->getDefinition('cloudsandwich.filemanager');
         $taggedServices = $container->findTaggedServiceIds('cloudsandwich.fileopener');
 
         foreach ($taggedServices as $id => $attributes) {
-            $definition->addMethodCall('addOpener',array(new Reference($id)));
+            $definition->addMethodCall('addOpener', [new Reference($id)]);
         }
     }
-
 }
