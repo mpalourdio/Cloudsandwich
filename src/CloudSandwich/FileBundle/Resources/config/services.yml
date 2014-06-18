@@ -32,4 +32,4 @@ services:
             - { name: cloudsandwich.fileopener}
     cloudsandwich.controller.default:
         class: '%cloudsandwich.filebundle.controller.default.class%'
-        arguments: [@cloudsandwich.filemanager]
+        arguments: [@cloudsandwich.filemanager,@templating]
