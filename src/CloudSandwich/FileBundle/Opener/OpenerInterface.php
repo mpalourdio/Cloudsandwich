@@ -11,12 +11,11 @@ use Symfony\Component\HttpFoundation\File\File;
 
 interface OpenerInterface
 {
-
     public function getMimeTypes();
 
     public function getTemplate();
 
-    public function initialize($alias,$requestedFolder, $fileName, File $file);
+    public function initialize($alias, $requestedFolder, $fileName, File $file);
 
     public function getVarsForTemplate();
 

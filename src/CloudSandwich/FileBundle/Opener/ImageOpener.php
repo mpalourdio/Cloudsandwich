@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ImageOpener extends AbstractOpener implements OpenerInterface
 {
+    /**
+     * @return array
+     */
     public function getMimeTypes()
     {
         return [
@@ -19,11 +22,17 @@ class ImageOpener extends AbstractOpener implements OpenerInterface
         ];
     }
 
+    /**
+     * @return string
+     */
     public function getTemplate()
     {
         return '@CloudSandwichFile/Image/image.html.twig';
     }
 
+    /**
+     * @return array
+     */
     public function getVarsForTemplate()
     {
         return [
@@ -31,10 +40,13 @@ class ImageOpener extends AbstractOpener implements OpenerInterface
             'modalname' => str_replace('.', '', $this->fileName),
             'folder'    => $this->requestedFolder,
             'size'      => $this->getReadableSize(),
-            'alias'=>$this->alias,
+            'alias'     => $this->alias,
         ];
     }
 
+    /**
+     * @return Response
+     */
     public function getFile()
     {
         $fp = fopen($this->file->getRealPath(), "rb");
