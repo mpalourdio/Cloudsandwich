@@ -7,11 +7,10 @@
  */
 namespace CloudSandwich\FileBundle\Opener;
 
-use Symfony\Component\HttpFoundation\File\File;
-
 /**
  * Default opener for files not openable
  * Class ImageOpener
+ *
  * @package CloudSandwich\FileBundle\Opener
  */
 class DefaultOpener extends AbstractOpener implements OpenerInterface
@@ -19,7 +18,7 @@ class DefaultOpener extends AbstractOpener implements OpenerInterface
 
     public function getMimeTypes()
     {
-        return array('default');
+        return ['default'];
     }
 
     public function getTemplate()
@@ -29,13 +28,11 @@ class DefaultOpener extends AbstractOpener implements OpenerInterface
 
     public function getVarsForTemplate()
     {
-        return array(
-            'name'=>$this->fileName,
-            'mime'=>$this->file->getMimeType(),
-            'folder'=>$this->requestedFolder,
-            'size'=>$this->getReadableSize()
-        );
+        return [
+            'name'   => $this->fileName,
+            'mime'   => $this->file->getMimeType(),
+            'folder' => $this->requestedFolder,
+            'size'   => $this->getReadableSize()
+        ];
     }
-
-
 }

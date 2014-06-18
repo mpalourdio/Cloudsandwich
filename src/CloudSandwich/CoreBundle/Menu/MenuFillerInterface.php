@@ -7,9 +7,6 @@
  */
 namespace CloudSandwich\CoreBundle\Menu;
 
-use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
-
 interface MenuFillerInterface
 {
     /**

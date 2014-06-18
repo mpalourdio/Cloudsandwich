@@ -2,8 +2,8 @@
 
 namespace CloudSandwich\FileBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as CFG;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,30 +15,36 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        return [];
     }
+
     /**
      * @CFG\Route("/list")
      * @CFG\Template()
      */
     public function filesAction(Request $request)
     {
-        $html="";
-        $fm =  $this->get("cloudsandwich.filemanager");
-        $filelist = $fm->listDirectory($request->get('folder'));
+        $html        = "";
+        $fileManager = $this->get("cloudsandwich.filemanager");
+        $filelist    = $fileManager->listDirectory($request->get('folder'));
         //Render list of folders
-        if(isset($filelist['folders'])){
-            foreach($filelist['folders'] as $folder){
-                $html.=$this->render('@CloudSandwichFile/Default/folder.html.twig',array('name'=>$folder['name'],'link'=>$folder['link']))->getContent();
+        if (isset($filelist['folders'])) {
+            foreach ($filelist['folders'] as $folder) {
+                $html .= $this->render(
+                    '@CloudSandwichFile/Default/folder.html.twig',
+                    ['name' => $folder['name'], 'link' => $folder['link']]
+                )
+                    ->getContent();
             }
         }
 
-        if(isset($filelist['files'])){
+        if (isset($filelist['files'])) {
             //Render list of files
-            foreach($filelist['files'] as $file){
-                $html.=$this->render($file['template'],$file['vars'])->getContent();
+            foreach ($filelist['files'] as $file) {
+                $html .= $this->render($file['template'], $file['vars'])->getContent();
             }
         }
+
         return new Response($html);
     }
 
@@ -48,10 +54,15 @@ class DefaultController extends Controller
      */
     public function breadcrumbAction(Request $request)
     {
-        $html="";
-        $fm =  $this->get("cloudsandwich.filemanager");
-        $breadcrumb = $fm->getBreadCrumb($request->get('folder'));
-        $html.=$this->render('@CloudSandwichFile/Default/breadcrumb.html.twig',array('folders'=>$breadcrumb))->getContent();
+        $html        = "";
+        $fileManager = $this->get("cloudsandwich.filemanager");
+        $breadcrumb  = $fileManager->getBreadCrumb($request->get('folder'));
+        $html .= $this->render(
+            '@CloudSandwichFile/Default/breadcrumb.html.twig',
+            ['folders' => $breadcrumb]
+        )
+            ->getContent();
+
         return new Response($html);
     }
 
@@ -62,9 +73,9 @@ class DefaultController extends Controller
     public function serveAction(Request $request)
     {
         $folder = $request->get("folder");
-        $file = $request->get('file');
-        $fm =  $this->get("cloudsandwich.filemanager");
-        return $fm->getFile($folder,$file);
-    }
+        $file   = $request->get('file');
+        $fileManager     = $this->get("cloudsandwich.filemanager");
 
+        return $fileManager->getFile($folder, $file);
+    }
 }

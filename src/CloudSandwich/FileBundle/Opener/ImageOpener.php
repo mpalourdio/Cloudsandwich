@@ -7,16 +7,16 @@
  */
 namespace CloudSandwich\FileBundle\Opener;
 
-use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\Response;
 
 class ImageOpener extends AbstractOpener implements OpenerInterface
 {
     public function getMimeTypes()
     {
-        return array(
-            'image/jpeg','image/png',
-        );
+        return [
+            'image/jpeg',
+            'image/png',
+        ];
     }
 
     public function getTemplate()
@@ -26,12 +26,12 @@ class ImageOpener extends AbstractOpener implements OpenerInterface
 
     public function getVarsForTemplate()
     {
-        return array(
-            'name'=>$this->fileName,
-            'modalname'=>str_replace('.','',$this->fileName),
-            'folder'=>$this->requestedFolder,
-            'size'=>$this->getReadableSize()
-        );
+        return [
+            'name'      => $this->fileName,
+            'modalname' => str_replace('.', '', $this->fileName),
+            'folder'    => $this->requestedFolder,
+            'size'      => $this->getReadableSize()
+        ];
     }
 
     public function getFile()
@@ -43,6 +43,7 @@ class ImageOpener extends AbstractOpener implements OpenerInterface
 
         $response = new Response($str, 200);
         $response->headers->set('Content-Type', $this->file->getMimetype());
+
         return $response;
     }
 }

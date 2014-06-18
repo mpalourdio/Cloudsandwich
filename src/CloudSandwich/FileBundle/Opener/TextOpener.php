@@ -11,9 +11,9 @@ class TextOpener extends AbstractOpener implements OpenerInterface
 {
     public function getMimeTypes()
     {
-        return array(
+        return [
             'text/plain',
-        );
+        ];
     }
 
     public function getTemplate()
@@ -24,11 +24,11 @@ class TextOpener extends AbstractOpener implements OpenerInterface
     public function getVarsForTemplate()
     {
 
-        return array(
-            'name'=>$this->fileName,
-            'modalname'=>str_replace('.','',$this->fileName),
-            'size'=>$this->getReadableSize(),
-            'folder'=>$this->requestedFolder
-        );
+        return [
+            'name'      => $this->fileName,
+            'modalname' => str_replace('.', '', $this->fileName),
+            'size'      => $this->getReadableSize(),
+            'folder'    => $this->requestedFolder
+        ];
     }
 }

@@ -18,10 +18,14 @@ class MenuFiller implements MenuFillerInterface
         $this->translator = $translator;
     }
 
-    public function getValues(){
-        return array(
-            'core.index'=>array('label'=>$this->translator->trans('core.menu.index'),'route'=>'cloudsandwich_core_default_authindex','attributes'=>array('icon'=>'fa-home')),
-        );
+    public function getValues()
+    {
+        return [
+            'core.index' => [
+                'label'      => $this->translator->trans('core.menu.index'),
+                'route'      => 'cloudsandwich_core_default_authindex',
+                'attributes' => ['icon' => 'fa-home']
+            ],
+        ];
     }
-
 }

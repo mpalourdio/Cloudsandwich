@@ -21,9 +21,10 @@ abstract class AbstractOpener implements OpenerInterface
 
     abstract function getTemplate();
 
-    public function initialize($requestedFolder,$fileName,File $file){
-        $this->file=$file;
-        $this->fileName = $fileName;
+    public function initialize($requestedFolder, $fileName, File $file)
+    {
+        $this->file            = $file;
+        $this->fileName        = $fileName;
         $this->requestedFolder = $requestedFolder;
     }
 
@@ -39,17 +40,21 @@ abstract class AbstractOpener implements OpenerInterface
         $response = new Response($str, 200);
         $response->headers->set('Content-Type', 'application/octet-stream');
         $response->headers->set('Content-Transfer-Encoding', 'Binary');
-        $response->headers->set('Content-disposition', "attachment; filename=\"" . $this->file->getFilename(). "\"");
+        $response->headers->set('Content-disposition', "attachment; filename=\"" . $this->file->getFilename() . "\"");
+
         return $response;
     }
-    protected function getReadableSize(){
+
+    protected function getReadableSize()
+    {
         $size = $this->file->getSize();
-        $size = ($size/8/1024);
+        $size = ($size / 8 / 1024);
         $unit = 'ko';
-        if($size>1024){
-            $size = $size/1024;
-            $unit='Mo';
+        if ($size > 1024) {
+            $size = $size / 1024;
+            $unit = 'Mo';
         }
-        return number_format($size,2).$unit;
+
+        return number_format($size, 2) . $unit;
     }
 }
