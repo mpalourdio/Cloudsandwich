@@ -7,8 +7,17 @@
  */
 namespace CloudSandwich\FileBundle\Opener;
 
+/**
+ * Class PdfOpener
+ *
+ * @package CloudSandwich\FileBundle\Opener
+ * @author  Sergio Mendolia <sergio@mendolia.ch>
+ */
 class PdfOpener extends AbstractOpener implements OpenerInterface
 {
+    /**
+     * {@@inheritdoc}
+     */
     public function getMimeTypes()
     {
         return [
@@ -16,18 +25,24 @@ class PdfOpener extends AbstractOpener implements OpenerInterface
         ];
     }
 
+    /**
+     * {@@inheritdoc}
+     */
     public function getTemplate()
     {
         return '@CloudSandwichFile/Pdf/pdf.html.twig';
     }
 
+    /**
+     * {@@inheritdoc}
+     */
     public function getVarsForTemplate()
     {
         return [
-            'name'      => $this->fileName,
+            'name' => $this->fileName,
             'modalname' => str_replace('.', '', $this->fileName),
-            'folder'    => $this->requestedFolder,
-            'size'      => $this->getReadableSize(),
+            'folder' => $this->requestedFolder,
+            'size' => $this->getReadableSize(),
         ];
     }
 }

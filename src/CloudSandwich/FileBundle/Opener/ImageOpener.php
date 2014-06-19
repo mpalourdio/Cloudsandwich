@@ -9,8 +9,17 @@ namespace CloudSandwich\FileBundle\Opener;
 
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class ImageOpener
+ *
+ * @package CloudSandwich\FileBundle\Opener
+ *           * @author  Sergio Mendolia <sergio@mendolia.ch>
+ */
 class ImageOpener extends AbstractOpener implements OpenerInterface
 {
+    /**
+     * {@@inheritdoc}
+     */
     public function getMimeTypes()
     {
         return [
@@ -19,22 +28,31 @@ class ImageOpener extends AbstractOpener implements OpenerInterface
         ];
     }
 
+    /**
+     * {@@inheritdoc}
+     */
     public function getTemplate()
     {
         return '@CloudSandwichFile/Image/image.html.twig';
     }
 
+    /**
+     * {@@inheritdoc}
+     */
     public function getVarsForTemplate()
     {
         return [
-            'name'      => $this->fileName,
+            'name' => $this->fileName,
             'modalname' => str_replace('.', '', $this->fileName),
-            'folder'    => $this->requestedFolder,
-            'size'      => $this->getReadableSize(),
-            'alias'=>$this->alias,
+            'folder' => $this->requestedFolder,
+            'size' => $this->getReadableSize(),
+            'alias' => $this->alias,
         ];
     }
 
+    /**
+     * {@@inheritdoc}
+     */
     public function getFile()
     {
         $fp = fopen($this->file->getRealPath(), "rb");

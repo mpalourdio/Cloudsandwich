@@ -12,20 +12,28 @@ namespace CloudSandwich\FileBundle\Opener;
  * Class ImageOpener
  *
  * @package CloudSandwich\FileBundle\Opener
+ * @author  Sergio Mendolia <sergio@mendolia.ch>
  */
 class DefaultOpener extends AbstractOpener implements OpenerInterface
 {
 
+    /**
+     * {@@inheritdoc}
+     */
     public function getMimeTypes()
     {
         return ['default'];
     }
-
+    /**
+     * {@@inheritdoc}
+     */
     public function getTemplate()
     {
         return '@CloudSandwichFile/Default/file.html.twig';
     }
-
+    /**
+     * {@@inheritdoc}
+     */
     public function getVarsForTemplate()
     {
         return [

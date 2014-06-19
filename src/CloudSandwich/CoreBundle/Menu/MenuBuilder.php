@@ -10,23 +10,51 @@ namespace CloudSandwich\CoreBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class MenuBuilder
+ *
+ * @package CloudSandwich\CoreBundle\Menu
+ * @author  Sergio Mendolia <sergio@mendolia.ch>
+ */
 class MenuBuilder
 {
-    private $factory;
-
-    private $items = [];
+    /**
+     * @var \Knp\Menu\FactoryInterface
+     */
+    protected $factory;
 
     /**
-     * @param FactoryInterface $factory
+     * @var array
+     */
+    protected $items = [];
+
+    /**
+     * contrsuctor
+     *
+     * @param FactoryInterface $factory knpmenubundle requirement
      */
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
     }
 
+    /**
+     * createMainMenu
+     *
+     * @param Request $request
+     *
+     * @return \Knp\Menu\ItemInterface
+     */
     public function createMainMenu(Request $request)
     {
-        $menu = $this->factory->createItem('root', ['childrenAttributes' => ['class' => 'nav nav-sidebar']]);
+        $menu = $this->factory->createItem(
+            'root',
+            [
+                'childrenAttributes' => [
+                    'class' => 'nav nav-sidebar'
+                ]
+            ]
+        );
 
         foreach ($this->items as $id => $item) {
             $menu->addChild($id, $item);
@@ -38,7 +66,7 @@ class MenuBuilder
     /**
      * For each child bundle, we add its menu
      *
-     * @param MenuFillerInterface $id
+     * @param MenuFillerInterface $id the service id given by the compiler pass
      */
     public function addFiller(MenuFillerInterface $id)
     {

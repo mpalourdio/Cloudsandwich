@@ -10,28 +10,76 @@ namespace CloudSandwich\FileBundle\Opener;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class AbstractOpener
+ *
+ * @package CloudSandwich\FileBundle\Opener
+ * @author  Sergio Mendolia <sergio@mendolia.ch>
+ */
 abstract class AbstractOpener implements OpenerInterface
 {
 
+    /**
+     * @var
+     */
     protected $requestedFolder;
+    /**
+     * @var string
+     */
     protected $fileName;
+    /**
+     * @var File
+     */
     protected $file;
+    /**
+     * @var
+     */
     protected $alias;
 
+    /**
+     * Returns list of mimetypes opened by the opener
+     *
+     * @return array
+     */
     abstract function getMimeTypes();
 
+    /**
+     * Returns a template name to render files of this type
+     *
+     * @return mixed
+     */
     abstract function getTemplate();
 
-    public function initialize($alias,$requestedFolder, $fileName, File $file)
+    /**
+     * Initialize the opener for a file
+     *
+     * @param string $alias           the alias of the folder
+     * @param string $requestedFolder the subfolder of the alias
+     * @param string $fileName        the name of the file
+     * @param File   $file            a file instance of the file
+     *
+     * @return void
+     */
+    public function initialize($alias, $requestedFolder, $fileName, File $file)
     {
-        $this->file            = $file;
-        $this->fileName        = $fileName;
+        $this->file = $file;
+        $this->fileName = $fileName;
         $this->requestedFolder = $requestedFolder;
         $this->alias = $alias;
     }
 
+    /**
+     * Return a list of variable to pass th twig template
+     *
+     * @return array
+     */
     abstract function getVarsForTemplate();
 
+    /**
+     * Returns the file to be served
+     *
+     * @return Response
+     */
     public function getFile()
     {
         $fp = fopen($this->file->getRealPath(), "rb");
@@ -47,6 +95,11 @@ abstract class AbstractOpener implements OpenerInterface
         return $response;
     }
 
+    /**
+     * Returns a size readable for a human
+     *
+     * @return string
+     */
     protected function getReadableSize()
     {
         $size = $this->file->getSize();

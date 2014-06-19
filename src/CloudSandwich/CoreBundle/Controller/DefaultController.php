@@ -8,18 +8,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
+     * Index of the public site
+     *
      * @CFG\Route("/")
      * @CFG\Template()
+     *
+     * @return array for twig
      */
     public function indexAction()
     {
-
         return [];
     }
 
     /**
+     * lol @ fixture de merde
+     *
      * @CFG\Route("/newuser")
-     * @CFG\Template()
+     * @return void
      */
     public function newuserAction()
     {
@@ -38,17 +43,19 @@ class DefaultController extends Controller
         $em->persist($m);
         $em->flush();
         */
-        return $this->redirect($this->generateUrl('cloudsandwich_core_default_index'));
+        return $this->redirect($this->generateUrl('/'));
     }
 
     /**
+     * Dashboard
+     *
      * @CFG\Route("/auth/")
      * @CFG\Template()
+     *
+     * @return array for twig
      */
     public function authindexAction()
     {
-
-
         return [];
     }
 }
