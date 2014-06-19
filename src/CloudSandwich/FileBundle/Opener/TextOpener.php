@@ -40,10 +40,10 @@ class TextOpener extends AbstractOpener implements OpenerInterface
     {
 
         return [
-            'name' => $this->fileName,
+            'name'      => $this->fileName,
             'modalname' => str_replace('.', '', $this->fileName),
-            'size' => $this->getReadableSize(),
-            'folder' => $this->requestedFolder
+            'size'      => $this->getReadableSize(),
+            'folder'    => $this->requestedFolder
         ];
     }
 }

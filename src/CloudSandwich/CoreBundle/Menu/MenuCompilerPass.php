@@ -33,7 +33,7 @@ class MenuCompilerPass implements CompilerPassInterface
             return null;
         }
 
-        $definition = $container->getDefinition('cloudsandwich.menubuilder');
+        $definition     = $container->getDefinition('cloudsandwich.menubuilder');
         $taggedServices = $container->findTaggedServiceIds(
             'cloudsandwich.menufiller'
         );

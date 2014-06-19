@@ -42,11 +42,11 @@ class ImageOpener extends AbstractOpener implements OpenerInterface
     public function getVarsForTemplate()
     {
         return [
-            'name' => $this->fileName,
+            'name'      => $this->fileName,
             'modalname' => str_replace('.', '', $this->fileName),
-            'folder' => $this->requestedFolder,
-            'size' => $this->getReadableSize(),
-            'alias' => $this->alias,
+            'folder'    => $this->requestedFolder,
+            'size'      => $this->getReadableSize(),
+            'alias'     => $this->alias,
         ];
     }
 

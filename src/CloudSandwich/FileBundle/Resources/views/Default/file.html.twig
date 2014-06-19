@@ -1,12 +1,14 @@
 <tr>
     <td>{% block fileicon %}<i class="fa fa-file"></i>{% endblock %}</td>
     <td>
-        {% block filename %}<a href="{{ path("cloudsandwich_file_default_serve",{'file':name,'folder':folder,'alias':alias}) }}">{{ name }}</a> {{ mime }}{% endblock %}
+        {% block filename %}<a
+            href="{{ path("cloudsandwich_file_default_serve",{'file':name,'folder':folder,'alias':alias}) }}">{{ name }}</a> {{ mime }}{% endblock %}
     </td>
     <td>{% block filesize %}{{ size }}{% endblock %}</td>
     <td>
         {% block fileactions %}
-            <a href="{{ path("cloudsandwich_file_default_serve",{'file':name,'folder':folder,'alias':alias}) }}"><i class="fa fa-cloud-download"></i></a>
+            <a href="{{ path("cloudsandwich_file_default_serve",{'file':name,'folder':folder,'alias':alias}) }}"><i
+                        class="fa fa-cloud-download"></i></a>
         {% endblock %}
     </td>
 </tr>

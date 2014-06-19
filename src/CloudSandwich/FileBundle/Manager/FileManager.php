@@ -58,8 +58,8 @@ class FileManager
         $folders
     ) {
         $this->translator = $translator;
-        $this->context = $context;
-        $this->aliases = $folders;
+        $this->context    = $context;
+        $this->aliases    = $folders;
     }
 
     /**
@@ -183,7 +183,7 @@ class FileManager
 
             $filesToDisplay['files'][] = [
                 'template' => $opener->getTemplate(),
-                'vars' => $opener->getVarsForTemplate($requestedFolder, $file->getFilename())
+                'vars'     => $opener->getVarsForTemplate($requestedFolder, $file->getFilename())
             ];
         }
 

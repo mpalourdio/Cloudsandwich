@@ -36,7 +36,7 @@ class DefaultController extends Controller
     public function __construct(FileManager $fileManager, TwigEngine $templating)
     {
         $this->fileManager = $fileManager;
-        $this->templating = $templating;
+        $this->templating  = $templating;
     }
 
     /**
@@ -66,7 +66,7 @@ class DefaultController extends Controller
      */
     public function filesAction(Request $request, $alias)
     {
-        $html = "";
+        $html     = "";
         $filelist = $this->fileManager->listDirectory(
             $alias,
             $request->get('folder')
@@ -108,7 +108,7 @@ class DefaultController extends Controller
      */
     public function breadcrumbAction(Request $request, $alias)
     {
-        $html = "";
+        $html       = "";
         $breadcrumb = $this->fileManager->getBreadCrumb(
             $alias,
             $request->get('folder')
@@ -136,7 +136,7 @@ class DefaultController extends Controller
     public function serveAction(Request $request, $alias)
     {
         $folder = $request->get('folder');
-        $file = $request->get('file');
+        $file   = $request->get('file');
 
         return $this->fileManager->getFile($alias, $folder, $file);
     }

@@ -1,17 +1,17 @@
-.cloudsandwich_filebrowser > table > thead > tr > th.icon-col{
-    width:10px;
+.cloudsandwich_filebrowser > table > thead > tr > th.icon-col {
+    width: 10px;
 }
 
-.cloudsandwich_filebrowser > table > thead > tr > th.file-col{
+.cloudsandwich_filebrowser > table > thead > tr > th.file-col {
 
 }
 
-.cloudsandwich_filebrowser > table > thead > tr > th.size-col{
-    width:45px;
+.cloudsandwich_filebrowser > table > thead > tr > th.size-col {
+    width: 45px;
 }
 
-.cloudsandwich_filebrowser > table > thead > tr > th.actions-col{
-    width:45px;
+.cloudsandwich_filebrowser > table > thead > tr > th.actions-col {
+    width: 45px;
 }
 
 

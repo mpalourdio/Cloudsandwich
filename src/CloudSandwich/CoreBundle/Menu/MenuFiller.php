@@ -41,8 +41,8 @@ class MenuFiller implements MenuFillerInterface
     {
         return [
             'core.index' => [
-                'label' => $this->translator->trans('core.menu.index'),
-                'route' => 'cloudsandwich_core_default_authindex',
+                'label'      => $this->translator->trans('core.menu.index'),
+                'route'      => 'cloudsandwich_core_default_authindex',
                 'attributes' => ['icon' => 'fa-home']
             ],
         ];

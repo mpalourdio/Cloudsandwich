@@ -4,21 +4,21 @@
     <meta charset="utf-8">
     <title>{% block title %}Administration{% endblock %} :: CloudSandwich</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}"/>
 
     {% block stylesheets %}
-        {% stylesheets 'bundles/cloudsandwichcore/css/*' filter="cssrewrite"%}
-            <link href="{{ asset_url }}" rel="stylesheet">
+        {% stylesheets 'bundles/cloudsandwichcore/css/*' filter="cssrewrite" %}
+        <link href="{{ asset_url }}" rel="stylesheet">
         {% endstylesheets %}
     {% endblock %}
 </head>
 <body>
 
-    {% block content %}{% endblock %}
-    {% block javascripts %}
-        {% javascripts 'bundles/cloudsandwichcore/js/jquery-2.1.1.min.js' 'bundles/cloudsandwichcore/js/*' %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endblock %}
+{% block content %}{% endblock %}
+{% block javascripts %}
+    {% javascripts 'bundles/cloudsandwichcore/js/jquery-2.1.1.min.js' 'bundles/cloudsandwichcore/js/*' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
 </body>
 </html>

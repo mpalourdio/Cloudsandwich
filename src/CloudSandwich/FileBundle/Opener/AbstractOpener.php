@@ -62,10 +62,10 @@ abstract class AbstractOpener implements OpenerInterface
      */
     public function initialize($alias, $requestedFolder, $fileName, File $file)
     {
-        $this->file = $file;
-        $this->fileName = $fileName;
+        $this->file            = $file;
+        $this->fileName        = $fileName;
         $this->requestedFolder = $requestedFolder;
-        $this->alias = $alias;
+        $this->alias           = $alias;
     }
 
     /**

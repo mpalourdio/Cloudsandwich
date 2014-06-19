@@ -24,6 +24,7 @@ class DefaultOpener extends AbstractOpener implements OpenerInterface
     {
         return ['default'];
     }
+
     /**
      * {@@inheritdoc}
      */
@@ -31,6 +32,7 @@ class DefaultOpener extends AbstractOpener implements OpenerInterface
     {
         return '@CloudSandwichFile/Default/file.html.twig';
     }
+
     /**
      * {@@inheritdoc}
      */
